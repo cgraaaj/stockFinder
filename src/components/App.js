@@ -13,9 +13,10 @@ var strategyy = null;
 var sectorOptions = [];
 var stocks = [];
 
-console.log(`http://${process.env.REACT_APP_APIHOST}/strategies`)
+// console.log(`http://${process.env.REACT_APP_APIHOST}/strategies`)
 axios
-  .get(`http://${process.env.REACT_APP_APIHOST}:${process.env.REACT_APP_APIPORT}/strategies`)
+  // .get(`http://${process.env.REACT_APP_APIHOST}:${process.env.REACT_APP_APIPORT}/strategies`)
+  .get(`http://${process.env.REACT_APP_APIHOST}/api/strategies`)
   .then((res) => {
     data = res.data;
     data.map((d) => dateOptions.push(d.date));
@@ -26,7 +27,7 @@ const getStrategies = (date) => {
   datee = date;
   data
     .filter((d) => d.date === date)[0]
-    .strategy.map((s) => {
+    .strategy.forEach((s) => {
       strategyOptions.push(s.name);
     });
 };
@@ -37,7 +38,7 @@ const getSectors = (strat) => {
   data
     .filter((d) => d.date === datee)[0]
     .strategy.filter((s) => s.name === strat)[0]
-    .sectors.map((s) => sectorOptions.push(s.name));
+    .sectors.forEach((s) => sectorOptions.push(s.name));
 };
 
 const getStocks = (sector) => {
@@ -47,7 +48,7 @@ const getStocks = (sector) => {
     .sectors.filter((s) => s.name === sector)[0].stocks;
 };
 
-export default () => {
+const App = () => {
   const [dateSelected, dateSetSelected] = useState(dateOptions[0]);
   const [strategySelected, strategySetSelected] = useState(strategyOptions[0]);
   const [sectorSelected, secortSetSelected] = useState(sectorOptions[0]);
@@ -77,3 +78,5 @@ export default () => {
     </div>
   );
 };
+
+export default App;

@@ -16,7 +16,7 @@ var stocks = [];
 // console.log(`http://${process.env.REACT_APP_APIHOST}/strategies`)
 axios
   // .get(`http://${process.env.REACT_APP_APIHOST}:${process.env.REACT_APP_APIPORT}/strategies`)
-  .get(`http://${process.env.REACT_APP_APIHOST}/api/strategies`)
+  .get(`https://${process.env.REACT_APP_APIHOST}/api/strategies`)
   .then((res) => {
     data = res.data;
     data.map((d) => dateOptions.push(d.date));
